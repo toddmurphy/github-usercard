@@ -2,13 +2,20 @@
            (replacing the palceholder with your Github name):
            https://api.github.com/users/<your name>
 */
+const cards = document.querySelector('.cards'); //main Parent to append 'githubCard'
+
 axios
   .get('https://api.github.com/users/toddmurphy')
   .then(response => {
-    console.log(response);
+    // console.log(response);
+    response.data.forEach(item => {
+      const newCard = githubCard(item);
+      console.log(item);
+      cards.appendChild(newCard); //should output a bunch of cards
+    });
   })
   .catch(error => {
-    console.log('Your response failed and data not returning', error);
+    // console.log('Your response failed and data not returning', error);
   });
 /* Step 2: Inspect and study the data coming back, this is YOUR 
    github info! You will need to understand the structure of this 
@@ -16,9 +23,9 @@ axios
 
    Skip to Step 3.
 */
-const entryPoint = document.querySelector('.cards');
 
-function githubCard() {
+// githubCard gets appended to 'cards'
+function githubCard(data) {
   //Create elements
   const card = document.createElement('div'); //main element we append all 'p'
   const githubName = document.createElement('p');
@@ -49,17 +56,20 @@ function githubCard() {
   githubFollowers.classList.add('p');
   githubFollowing.classList.add('p');
   githubBio.classList.add('p');
-  githubImg.classList.add('p');
-}
-// githubCard(
-//   data.name,
-//   data.login,
-//   data.location,
-//   data.html_url,
-//   data.follower,
-//   data.following,
-//   data.bio
-// );
+  githubImg.classList.add('img');
+
+  //Set up text content
+  githubName.textContent = data.name;
+  githubLogin.textContent = data.login;
+  githubLocation.textContent = data.location;
+  githubURL.textContent = data.html_url;
+  githubFollowers.textContent = data.followers;
+  githubFollowing.textContent = data.following;
+  githubBio.textContent = data.bio;
+  githubImg.src = data.avatar_url;
+
+  return card;
+} //This closes githubCard
 
 /* Step 4: Pass the data received from Github into your function, 
            create a new component and add it to the DOM as a child of .cards
