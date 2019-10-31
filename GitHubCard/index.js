@@ -16,6 +16,50 @@ axios
 
    Skip to Step 3.
 */
+const entryPoint = document.querySelector('.cards');
+
+function githubCard() {
+  //Create elements
+  const card = document.createElement('div'); //main element we append all 'p'
+  const githubName = document.createElement('p');
+  const githubLogin = document.createElement('p');
+  const githubLocation = document.createElement('p');
+  const githubURL = document.createElement('p');
+  const githubFollowers = document.createElement('p');
+  const githubFollowing = document.createElement('p');
+  const githubBio = document.createElement('p');
+  const githubImg = document.createElement('img');
+
+  //Set up structure of elements
+  card.appendChild(githubName);
+  card.appendChild(githubLogin);
+  card.appendChild(githubLocation);
+  card.appendChild(githubURL);
+  card.appendChild(githubFollowers);
+  card.appendChild(githubFollowing);
+  card.appendChild(githubBio);
+  card.appendChild(githubImg);
+
+  //Setup classes
+  card.classList.add('card');
+  githubName.classList.add('name');
+  githubLogin.classList.add('username');
+  githubLocation.classList.add('p');
+  githubURL.classList.add('p');
+  githubFollowers.classList.add('p');
+  githubFollowing.classList.add('p');
+  githubBio.classList.add('p');
+  githubImg.classList.add('p');
+}
+// githubCard(
+//   data.name,
+//   data.login,
+//   data.location,
+//   data.html_url,
+//   data.follower,
+//   data.following,
+//   data.bio
+// );
 
 /* Step 4: Pass the data received from Github into your function, 
            create a new component and add it to the DOM as a child of .cards
