@@ -4,19 +4,21 @@
 */
 const cards = document.querySelector('.cards'); //main Parent to append 'githubCard'
 
-axios
-  .get('https://api.github.com/users/toddmurphy')
-  .then(response => {
-    // console.log(response);
-    response.data.forEach(item => {
-      const newCard = githubCard(item);
-      console.log(item);
-      cards.appendChild(newCard); //should output a bunch of cards
-    });
-  })
-  .catch(error => {
-    // console.log('Your response failed and data not returning', error);
+axios.get('https://api.github.com/users/toddmurphy').then(response => {
+  console.log(response.data);
+  //convert response from object to array using 'Object.entries' and then use array method like forEach to loop over data
+  const arrayData = Object.entries(response.data);
+  console.log(arrayData);
+  arrayData.forEach(item => {
+    const newCard = githubCard(item);
+    console.log(newCard);
+    cards.appendChild(newCard);
   });
+});
+
+// .catch(error => {
+//   // console.log('Your response failed and data not returning', error);
+// });
 /* Step 2: Inspect and study the data coming back, this is YOUR 
    github info! You will need to understand the structure of this 
    data in order to use it to build your component function 
