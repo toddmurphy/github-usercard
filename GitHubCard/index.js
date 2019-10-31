@@ -33,6 +33,7 @@ function githubCard(data) {
   //Create elements
   console.log(data);
   const card = document.createElement('div'); //main element we append all 'p'
+  const cardContainer = document.createElement('div');
   const githubName = document.createElement('p');
   const githubLogin = document.createElement('p');
   const githubLocation = document.createElement('p');
@@ -42,18 +43,35 @@ function githubCard(data) {
   const githubBio = document.createElement('p');
   const githubImg = document.createElement('img');
 
+  //   <div class="card">
+  //   <img src={image url of user} />
+  //   <div class="card-info">
+  //     <h3 class="name">{users name}</h3>
+  //     <p class="username">{users user name}</p>
+  //     <p>Location: {users location}</p>
+  //     <p>Profile:
+  //       <a href={address to users github page}>{address to users github page}</a>
+  //     </p>
+  //     <p>Followers: {users followers count}</p>
+  //     <p>Following: {users following count}</p>
+  //     <p>Bio: {users bio}</p>
+  //   </div>
+  // </div>
+
   //Set up structure of elements
-  card.appendChild(githubName);
-  card.appendChild(githubLogin);
-  card.appendChild(githubLocation);
-  card.appendChild(githubURL);
-  card.appendChild(githubFollowers);
-  card.appendChild(githubFollowing);
-  card.appendChild(githubBio);
   card.appendChild(githubImg);
+  card.appendChild(cardContainer);
+  cardContainer.appendChild(githubName);
+  cardContainer.appendChild(githubLogin);
+  cardContainer.appendChild(githubLocation);
+  cardContainer.appendChild(githubURL);
+  cardContainer.appendChild(githubFollowers);
+  cardContainer.appendChild(githubFollowing);
+  cardContainer.appendChild(githubBio);
 
   //Setup classes
   card.classList.add('card');
+  cardContainer.classList.add('card-info');
   githubName.classList.add('name');
   githubLogin.classList.add('username');
   githubLocation.classList.add('p');
@@ -66,11 +84,11 @@ function githubCard(data) {
   //Set up text content
   githubName.textContent = data.name;
   githubLogin.textContent = data.login;
-  githubLocation.textContent = data.location;
+  githubLocation.textContent = `Location: ${data.location}`;
   githubURL.textContent = data.html_url;
-  githubFollowers.textContent = data.followers;
-  githubFollowing.textContent = data.following;
-  githubBio.textContent = data.bio;
+  githubFollowers.textContent = `Followers: ${data.followers}`;
+  githubFollowing.textContent = `Following: ${data.following}`;
+  githubBio.textContent = `Bio: ${data.bio}`;
   githubImg.src = data.avatar_url;
 
   return card;
