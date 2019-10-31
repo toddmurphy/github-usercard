@@ -2,18 +2,20 @@
            (replacing the palceholder with your Github name):
            https://api.github.com/users/<your name>
 */
-const cards = document.querySelector('.cards'); //main Parent to append 'githubCard'
+//main Parent to append 'githubCard'
+const cards = document.querySelector('.cards');
 
 axios.get('https://api.github.com/users/toddmurphy').then(response => {
-  console.log(response.data);
+  // console.log(response.data);
   //convert response from object to array using 'Object.entries' and then use array method like forEach to loop over data
-  const arrayData = Object.entries(response.data);
-  console.log(arrayData);
-  arrayData.forEach(item => {
-    const newCard = githubCard(item);
-    console.log(newCard);
-    cards.appendChild(newCard);
-  });
+  // const arrayData = Object.entries(response.data);
+  // console.log(arrayData);
+  // response.data.forEach(item => {
+  //   const newCard = githubCard(item);
+  //   console.log(item);
+  //   cards.appendChild(newCard);
+  // });
+  cards.appendChild(githubCard(response.data));
 });
 
 // .catch(error => {
@@ -29,6 +31,7 @@ axios.get('https://api.github.com/users/toddmurphy').then(response => {
 // githubCard gets appended to 'cards'
 function githubCard(data) {
   //Create elements
+  console.log(data);
   const card = document.createElement('div'); //main element we append all 'p'
   const githubName = document.createElement('p');
   const githubLogin = document.createElement('p');
