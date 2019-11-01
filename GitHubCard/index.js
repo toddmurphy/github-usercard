@@ -39,7 +39,7 @@ function githubCard(data) {
   const githubLogin = document.createElement('p');
   const githubLocation = document.createElement('p');
   const profileLink = document.createElement('p');
-  profileLink.textContent = 'profile';
+  // profileLink.textContent = 'profile';
   const githubURL = document.createElement('a');
   const githubFollowers = document.createElement('p');
   const githubFollowing = document.createElement('p');
