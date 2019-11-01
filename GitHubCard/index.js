@@ -5,21 +5,23 @@
 //main Parent to append 'githubCard'
 const cards = document.querySelector('.cards');
 
-axios.get('https://api.github.com/users/toddmurphy').then(response => {
-  // console.log(response.data);
-  //convert response from object to array using 'Object.entries' and then use array method like forEach to loop over data
-  // const arrayData = Object.entries(response.data);
-  // console.log(arrayData);
-  // arrayDataforEach(item => {
-  //   const newCard = githubCard(item);
-  //   console.log(item);
-  //   cards.appendChild(newCard);
-  // });
-  cards.appendChild(githubCard(response.data)).catch(error => {
+axios
+  .get('https://api.github.com/users/toddmurphy')
+  .then(response => {
+    // console.log(response.data);
+    //convert response from object to array using 'Object.entries' and then use array method like forEach to loop over data
+    // const arrayData = Object.entries(response.data);
+    // console.log(arrayData);
+    // arrayDataforEach(item => {
+    //   const newCard = githubCard(item);
+    //   console.log(item);
+    //   cards.appendChild(newCard);
+    // });
+    cards.appendChild(githubCard(response.data));
+  })
+  .catch(error => {
     console.log('Your response failed and data not returning', error);
   });
-});
-
 /* Step 2: Inspect and study the data coming back, this is YOUR 
    github info! You will need to understand the structure of this 
    data in order to use it to build your component function 
@@ -97,8 +99,19 @@ function githubCard(data) {
           user, and adding that card to the DOM.
 */
 
-const followersArray = [];
+const followersArray = ['BryanKAdams', 'astubbings', 'JacobWashburn', 'jiangeyre', 'dtauraso'];
 // List of five friends to follow.
+followersArray.forEach(item => {
+  axios
+    .get(`https://api.github.com/users/${item}`)
+    .then(response => {
+      console.log(response);
+      cards.appendChild(githubCard(response.data));
+    })
+    .catch(error => {
+      console.log('The follower data did not work', error);
+    });
+});
 
 /* Step 3: Create a function that accepts a single object as its only argument,
           Using DOM methods and properties, create a component that will return the following DOM element:
