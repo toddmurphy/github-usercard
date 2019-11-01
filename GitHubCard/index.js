@@ -10,17 +10,16 @@ axios.get('https://api.github.com/users/toddmurphy').then(response => {
   //convert response from object to array using 'Object.entries' and then use array method like forEach to loop over data
   // const arrayData = Object.entries(response.data);
   // console.log(arrayData);
-  // response.data.forEach(item => {
+  // arrayDataforEach(item => {
   //   const newCard = githubCard(item);
   //   console.log(item);
   //   cards.appendChild(newCard);
   // });
-  cards.appendChild(githubCard(response.data));
+  cards.appendChild(githubCard(response.data)).catch(error => {
+    console.log('Your response failed and data not returning', error);
+  });
 });
 
-// .catch(error => {
-//   // console.log('Your response failed and data not returning', error);
-// });
 /* Step 2: Inspect and study the data coming back, this is YOUR 
    github info! You will need to understand the structure of this 
    data in order to use it to build your component function 
@@ -37,7 +36,9 @@ function githubCard(data) {
   const githubName = document.createElement('p');
   const githubLogin = document.createElement('p');
   const githubLocation = document.createElement('p');
-  const githubURL = document.createElement('p');
+  const profileLink = document.createElement('p');
+  profileLink.textContent = 'profile';
+  const githubURL = document.createElement('a');
   const githubFollowers = document.createElement('p');
   const githubFollowing = document.createElement('p');
   const githubBio = document.createElement('p');
@@ -50,6 +51,8 @@ function githubCard(data) {
   cardContainer.appendChild(githubLogin);
   cardContainer.appendChild(githubLocation);
   cardContainer.appendChild(githubURL);
+  profileLink.appendChild(githubURL);
+  cardContainer.appendChild(profileLink);
   cardContainer.appendChild(githubFollowers);
   cardContainer.appendChild(githubFollowing);
   cardContainer.appendChild(githubBio);
@@ -71,6 +74,7 @@ function githubCard(data) {
   githubLogin.textContent = data.login;
   githubLocation.textContent = `Location: ${data.location}`;
   githubURL.textContent = data.html_url;
+  githubURL.href = data.html_url;
   githubFollowers.textContent = `Followers: ${data.followers}`;
   githubFollowing.textContent = `Following: ${data.following}`;
   githubBio.textContent = `Bio: ${data.bio}`;
@@ -94,6 +98,7 @@ function githubCard(data) {
 */
 
 const followersArray = [];
+// List of five friends to follow.
 
 /* Step 3: Create a function that accepts a single object as its only argument,
           Using DOM methods and properties, create a component that will return the following DOM element:
